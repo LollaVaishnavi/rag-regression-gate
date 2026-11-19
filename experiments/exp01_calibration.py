@@ -1,11 +1,15 @@
 """Is the gate calibrated under the null, and which interval method keeps it there?
 
 This is the experiment that decides the gate's default. Under the null the candidate is the baseline
-config run a second time, so the true difference is zero and nothing but run jitter separates the two
-score vectors. A 95 percent interval should then call a regression no more than about 5 percent of the
-time. BCa does not: the paired-difference vector is zero-inflated, most queries score identically, and
+config run a second time, so the true difference is zero and nothing but run jitter separates the
+two
+score vectors. A 95 percent interval should then call a regression no more than about 5 percent of
+the
+time. BCa does not: the paired-difference vector is zero-inflated, most queries score identically,
+and
 BCa's acceleration is estimated from a jackknife of a near-constant vector. The percentile interval,
-which does not estimate an acceleration, stays close to nominal. The naive threshold is measured too,
+which does not estimate an acceleration, stays close to nominal. The naive threshold is measured
+too,
 for the comparison the README leads with.
 """
 

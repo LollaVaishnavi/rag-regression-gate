@@ -1,7 +1,8 @@
 """The shipped scenario: one golden set, one candidate, the verdict a team would actually get.
 
 The candidate carries a real corrupted-shard fault whose population drop is measured here on a large
-draw. On the single fifty-query golden set the team happens to hold, the observed drop is smaller, and
+draw. On the single fifty-query golden set the team happens to hold, the observed drop is smaller,
+and
 the naive threshold reads it as a pass: it ships the regression. The gate reports an interval that
 still admits a delta-sized drop and returns inconclusive instead. This is the whole argument in one
 run, so the README leads with it.

@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import numpy as np
-
 from ragscore.corpus import make_corpus, make_golden_set
 from ragscore.metrics import per_query_metric
 from ragscore.retrieval import BASELINE, Retriever, RetrieverConfig, rank_golden_set

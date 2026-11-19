@@ -1,6 +1,7 @@
 """How many bootstrap resamples does the interval need before it stops moving?
 
-The policy fixes n_resamples at 5000. This experiment is the justification: it recomputes the shipped
+The policy fixes n_resamples at 5000. This experiment is the justification: it recomputes the
+shipped
 interval at a range of resample counts and reports how far the endpoints still move. A number chosen
 by habit is a number a reviewer discounts; a number chosen by a printed convergence curve is not.
 """

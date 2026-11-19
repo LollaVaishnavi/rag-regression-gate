@@ -2,7 +2,8 @@
 
 For a range of fault sizes this draws many fifty-query golden sets and tallies what each gate says.
 Two things show up. Near a true drop the size of the policy's delta the naive verdict is close to a
-coin flip across golden sets: the same change is failed on some samples and passed on others, decided
+coin flip across golden sets: the same change is failed on some samples and passed on others,
+decided
 by which queries were drawn. The gate replaces most of those confident-but-wrong verdicts with
 "inconclusive", which is the honest reading of a sample that cannot resolve the effect.
 """
@@ -13,7 +14,6 @@ from harness import (
     candidate_for_blend,
     default_policy_for_experiments,
     fixed_corpus,
-    population_sd_diff,
     run_trials,
     write_json,
 )
@@ -28,7 +28,8 @@ LARGE_SAMPLE = 4000
 
 def _true_drop(corpus, candidate, policy) -> float:
     scores = run_trials(
-        corpus, candidate, trials=1, n_queries=LARGE_SAMPLE, k=policy.k, metric=policy.primary_metric
+        corpus, candidate, trials=1, n_queries=LARGE_SAMPLE, k=policy.k,
+        metric=policy.primary_metric
     )
     return float((scores[0].candidate - scores[0].baseline).mean())
 

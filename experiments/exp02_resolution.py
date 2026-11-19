@@ -1,8 +1,10 @@
 """What can a fifty-query golden set actually resolve, and how many queries would it take?
 
 This is the resolution arithmetic. Using the per-query difference spread measured on a large draw of
-the shipped candidate, it reports the smallest drop a fifty-query set can detect at the policy's alpha
-and power, and the number of queries the policy's delta would actually need. The gap between the set a
+the shipped candidate, it reports the smallest drop a fifty-query set can detect at the policy's
+alpha
+and power, and the number of queries the policy's delta would actually need. The gap between the
+set a
 team has and the set the claim needs is the number this project exists to make visible.
 """
 

@@ -53,7 +53,7 @@ def ndcg_at_k(ranked_ids: Sequence[int], relevant: set[int], k: int) -> float:
         return 0.0
     ideal_hits = min(len(relevant), k)
     idcg = sum(1.0 / np.log2(position + 1) for position in range(1, ideal_hits + 1))
-    if idcg == 0.0:
+    if idcg == 0.0:  # pragma: no cover - unreachable: a non-empty relevant set gives idcg > 0
         return 0.0
     return dcg_at_k(ranked_ids, relevant, k) / idcg
 

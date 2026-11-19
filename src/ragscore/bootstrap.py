@@ -67,7 +67,7 @@ def _bca(diffs: np.ndarray, resamples: np.ndarray, alpha: float) -> Interval:
     jackknife = (diffs.sum() - diffs) / (n - 1)
     centred = jackknife.mean() - jackknife
     denom = 6.0 * (np.sum(centred**2) ** 1.5)
-    if denom == 0.0:
+    if denom == 0.0:  # pragma: no cover - unreachable: a constant jackknife is caught by z0 above
         out = _percentile(diffs, resamples, alpha)
         return Interval(out.point, out.low, out.high, out.alpha, method="bca-degenerate")
     acceleration = float(np.sum(centred**3) / denom)

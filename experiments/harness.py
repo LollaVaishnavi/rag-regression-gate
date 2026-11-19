@@ -51,7 +51,8 @@ def run_trials(
 ) -> list[TrialScores]:
     """Draw `trials` golden sets and score baseline against `candidate_config` on each.
 
-    The two retrievers are fitted once here, not per trial, which is the whole reason the experiments
+    The two retrievers are fitted once here, not per trial, which is the whole reason the
+    experiments
     finish in seconds rather than minutes.
     """
     baseline_retriever = Retriever(corpus, BASELINE)
