@@ -1,0 +1,12 @@
+{
+  "gate_verdict": "inconclusive",
+  "golden_size": 50,
+  "interval_high": 0.0041,
+  "interval_low": -0.0161,
+  "interval_method": "percentile",
+  "naive_ships_the_regression": true,
+  "naive_verdict": "pass",
+  "observed_diff": -0.0052,
+  "observed_drop": 0.0052,
+  "population_true_drop": -0.0162
+}

@@ -1,0 +1,53 @@
+{
+  "delta": 0.01,
+  "method": "percentile",
+  "n_queries": 50,
+  "rows": [
+    {
+      "blend": 0.0,
+      "gate_inconclusive_pct": 4.5,
+      "gate_pass_pct": 90.5,
+      "gate_regression_pct": 5.0,
+      "naive_pass_pct": 100.0,
+      "naive_regression_pct": 0.0,
+      "true_drop": 0.0002
+    },
+    {
+      "blend": 0.015,
+      "gate_inconclusive_pct": 44.5,
+      "gate_pass_pct": 5.5,
+      "gate_regression_pct": 50.0,
+      "naive_pass_pct": 54.5,
+      "naive_regression_pct": 45.5,
+      "true_drop": -0.0105
+    },
+    {
+      "blend": 0.03,
+      "gate_inconclusive_pct": 21.5,
+      "gate_pass_pct": 0.0,
+      "gate_regression_pct": 78.5,
+      "naive_pass_pct": 18.5,
+      "naive_regression_pct": 81.5,
+      "true_drop": -0.0162
+    },
+    {
+      "blend": 0.05,
+      "gate_inconclusive_pct": 6.5,
+      "gate_pass_pct": 0.0,
+      "gate_regression_pct": 93.5,
+      "naive_pass_pct": 1.0,
+      "naive_regression_pct": 99.0,
+      "true_drop": -0.0264
+    },
+    {
+      "blend": 0.08,
+      "gate_inconclusive_pct": 0.5,
+      "gate_pass_pct": 0.0,
+      "gate_regression_pct": 99.5,
+      "naive_pass_pct": 0.0,
+      "naive_regression_pct": 100.0,
+      "true_drop": -0.0457
+    }
+  ],
+  "trials": 200
+}

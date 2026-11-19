@@ -1,0 +1,130 @@
+{
+  "anchors": {
+    "bca_null_fp_pct": [
+      "BCa fired on {}",
+      "BCa called a regression on {}"
+    ],
+    "calibration_trials": [
+      "{} null golden sets",
+      "over {} null"
+    ],
+    "chosen_resamples": [
+      "{} resamples"
+    ],
+    "coinflip_gate_inconclusive_pct": [
+      "inconclusive on {}",
+      "{} of those sets"
+    ],
+    "coinflip_naive_pass_pct": [
+      "passed it on {}",
+      "ships it on {}"
+    ],
+    "coinflip_naive_regression_pct": [
+      "failed it on {}",
+      "fails it on {}"
+    ],
+    "coverage_line_pct": [
+      "{} of lines",
+      "{} line coverage"
+    ],
+    "gate_null_regression_pct": [
+      "gate fires on {}",
+      "calibrated to {}"
+    ],
+    "golden_size": [
+      "{}-query golden set",
+      "set has {} queries",
+      "{} queries it holds"
+    ],
+    "min_detectable_drop": [
+      "resolve a drop of {}",
+      "resolve about {}"
+    ],
+    "naive_null_fp_pct": [
+      "naive threshold fired on {}",
+      "naive fired on {}"
+    ],
+    "nominal_fp_pct": [
+      "nominal {}"
+    ],
+    "per_query_diff_sd": [
+      "difference spread of {}",
+      "spread of {}"
+    ],
+    "percentile_null_fp_pct": [
+      "percentile stayed at {}",
+      "percentile interval held at {}"
+    ],
+    "required_queries": [
+      "needs {} queries",
+      "{} queries to resolve"
+    ],
+    "shipped_interval_high": [
+      ", {}]",
+      "{}] still includes"
+    ],
+    "shipped_interval_low": [
+      "[{},",
+      "interval of [{}"
+    ],
+    "shipped_observed_drop": [
+      "measured drop is {}",
+      "observed drop of {}"
+    ],
+    "shipped_population_drop": [
+      "a real {} drop",
+      "carries a {} drop"
+    ],
+    "tests_total": [
+      "{} tests"
+    ]
+  },
+  "checked_documents": [
+    "README.md"
+  ],
+  "metrics": {
+    "bca_null_fp_pct": "14%",
+    "calibration_trials": "400",
+    "chosen_resamples": "5000",
+    "coinflip_gate_inconclusive_pct": "44.5%",
+    "coinflip_naive_pass_pct": "54.5%",
+    "coinflip_naive_regression_pct": "45.5%",
+    "coverage_line_pct": "100%",
+    "gate_null_regression_pct": "5%",
+    "golden_size": "50",
+    "min_detectable_drop": "0.019",
+    "naive_null_fp_pct": "0%",
+    "nominal_fp_pct": "5%",
+    "per_query_diff_sd": "0.049",
+    "percentile_null_fp_pct": "5.8%",
+    "required_queries": "187",
+    "shipped_interval_high": "0.004",
+    "shipped_interval_low": "-0.016",
+    "shipped_observed_drop": "0.005",
+    "shipped_population_drop": "0.016",
+    "tests_total": "101"
+  },
+  "note": "every value here is produced by running the suite and the experiments",
+  "precise": {
+    "bca_null_fp_pct": 14.0,
+    "calibration_trials": 400,
+    "chosen_resamples": 5000,
+    "coinflip_gate_inconclusive_pct": 44.5,
+    "coinflip_naive_pass_pct": 54.5,
+    "coinflip_naive_regression_pct": 45.5,
+    "coverage_line_pct": 100.0,
+    "gate_null_regression_pct": 5.0,
+    "golden_size": 50,
+    "min_detectable_drop": 0.0193,
+    "naive_null_fp_pct": 0.0,
+    "nominal_fp_pct": 5.0,
+    "per_query_diff_sd": 0.0488,
+    "percentile_null_fp_pct": 5.8,
+    "required_queries": 187,
+    "shipped_interval_high": 0.0041,
+    "shipped_interval_low": -0.0161,
+    "shipped_observed_drop": 0.0052,
+    "shipped_population_drop": 0.0162,
+    "tests_total": 101
+  }
+}

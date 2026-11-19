@@ -1,0 +1,8 @@
+{
+  "bca_false_positive_pct": 14.0,
+  "n_queries": 50,
+  "naive_false_positive_pct": 0.0,
+  "nominal_false_positive_pct": 5.0,
+  "percentile_false_positive_pct": 5.8,
+  "trials": 400
+}
