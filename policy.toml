@@ -26,3 +26,9 @@ n_resamples = 5000
 # The metric the verdict is computed from. recall@k and mrr are still measured and reported, but a
 # gate that fails on three metrics at once fails on the noisiest of the three, so only one gates.
 primary_metric = "ndcg"
+
+# The bootstrap interval method. "percentile" rather than the textbook "bca": experiment 01 measured
+# BCa calling a regression on 14% of null golden sets at a nominal 5%, because the paired-difference
+# vector is zero-inflated and BCa's acceleration is unstable on it. Percentile stayed at 5.8%. ADR
+# 005 has the measurement. Set this to "bca" only if you have rechecked the calibration on your data.
+bootstrap_method = "percentile"

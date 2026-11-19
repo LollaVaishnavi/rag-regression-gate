@@ -38,7 +38,7 @@ class GatePolicy:
     power: float = 0.80
     n_resamples: int = 5000
     primary_metric: str = "ndcg"
-    bootstrap_method: str = "bca"
+    bootstrap_method: str = "percentile"
 
     def __post_init__(self) -> None:
         if self.k < 1:

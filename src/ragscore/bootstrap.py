@@ -5,9 +5,19 @@ gate answers is "would this difference survive a different sample of queries". P
 same query is scored by both retrievers, so the two per-query vectors are correlated and resampling
 them together removes the between-query variance that a two-sample interval would wrongly keep.
 
-Two interval methods are implemented. BCa (bias-corrected and accelerated) is the default, because
-the per-query metric difference is bounded and skewed and BCa is the textbook correction for exactly
-that. The percentile interval is kept as a plainer comparison point.
+Two interval methods are implemented. BCa (bias-corrected and accelerated) is the textbook choice
+for
+a skewed bounded statistic and was the first default here. Experiment 01 then measured both under
+the
+null and BCa was not calibrated: it called a regression on 14 percent of null golden sets at a
+nominal
+5 percent, while the percentile interval stayed at 5.8 percent. The cause is that the
+paired-difference
+vector in this problem is zero-inflated, most queries score identically under two runs of one
+system,
+so BCa's acceleration is estimated from a jackknife of a near-constant vector and is unstable
+exactly
+when the gate needs it. The default is therefore percentile, and ADR 005 records the measurement.
 """
 
 from __future__ import annotations
@@ -79,12 +89,12 @@ def paired_bootstrap_diff(
     n_resamples: int,
     alpha: float,
     seed: int,
-    method: str = "bca",
+    method: str = "percentile",
 ) -> Interval:
     """Confidence interval for the mean paired difference candidate minus baseline.
 
-    `method` selects "bca" or "percentile". BCa is the default; both are kept so a calibration
-    experiment can measure them on the same data.
+    `method` selects "percentile" or "bca". Percentile is the default for the calibration reason in
+    ADR 005; the BCa path is kept so the calibration experiment can measure both on the same data.
     """
     baseline = np.asarray(baseline, dtype=float)
     candidate = np.asarray(candidate, dtype=float)
