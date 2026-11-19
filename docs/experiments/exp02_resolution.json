@@ -2,8 +2,8 @@
   "alpha": 0.05,
   "delta": 0.01,
   "golden_size": 50,
-  "min_detectable_drop": 0.0193,
-  "per_query_diff_sd": 0.0488,
+  "min_detectable_drop": 0.0196,
+  "per_query_diff_sd": 0.0495,
   "power": 0.8,
-  "required_queries_for_delta": 187
+  "required_queries_for_delta": 193
 }

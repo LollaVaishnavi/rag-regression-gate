@@ -68,19 +68,6 @@ def run_trials(
     return out
 
 
-def population_sd_diff(
-    corpus: Corpus,
-    candidate_config: RetrieverConfig,
-    n_queries: int,
-    k: int,
-    metric: str,
-) -> float:
-    """The per-query difference standard deviation on one large golden set, a stable sd estimate."""
-    scores = run_trials(corpus, candidate_config, trials=1, n_queries=n_queries, k=k, metric=metric)
-    diff = scores[0].candidate - scores[0].baseline
-    return float(np.std(diff, ddof=1))
-
-
 def write_json(name: str, payload: dict) -> Path:
     """Write an experiment's result to docs/experiments/<name>.json and return the path."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

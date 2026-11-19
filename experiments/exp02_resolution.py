@@ -10,27 +10,32 @@ team has and the set the claim needs is the number this project exists to make v
 
 from __future__ import annotations
 
-from harness import (
-    candidate_for_blend,
-    default_policy_for_experiments,
-    fixed_corpus,
-    population_sd_diff,
-    write_json,
-)
+import numpy as np
+from harness import default_policy_for_experiments, write_json
 
+from ragscore.evaluate import score_pair
 from ragscore.power import minimum_detectable_effect, required_sample_size
-from ragscore.scenario import SHIPPED_BLEND, SHIPPED_GOLDEN_SIZE
+from ragscore.scenario import SHIPPED_GOLDEN_SIZE, build_scenario
 
 LARGE_SAMPLE = 4000
 
 
 def main() -> None:
     policy = default_policy_for_experiments()
-    corpus = fixed_corpus()
-    candidate = candidate_for_blend(SHIPPED_BLEND)
-    sd_diff = population_sd_diff(
-        corpus, candidate, n_queries=LARGE_SAMPLE, k=policy.k, metric=policy.primary_metric
+    # Estimate the per-query difference spread on a large draw of the shipped scenario, the same
+    # draw the report uses, so the published resolution numbers and the report agree exactly.
+    big = build_scenario(golden_size=LARGE_SAMPLE)
+    scores = score_pair(
+        corpus=big.corpus,
+        golden=big.golden,
+        baseline_config=big.baseline_config,
+        candidate_config=big.candidate_config,
+        metric=policy.primary_metric,
+        k=policy.k,
+        baseline_seed=5,
+        candidate_seed=6,
     )
+    sd_diff = float(np.std(scores.candidate - scores.baseline, ddof=1))
     mde = minimum_detectable_effect(SHIPPED_GOLDEN_SIZE, sd_diff, policy.alpha, policy.power)
     required = required_sample_size(policy.delta, sd_diff, policy.alpha, policy.power)
 

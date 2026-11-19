@@ -53,12 +53,33 @@ def _rows(verdict: GateVerdict, policy: GatePolicy, mde: float, needed: int, gol
         (f"{int((1 - policy.alpha) * 100)}% interval", f"[{iv.low:+.4f}, {iv.high:+.4f}]"),
         ("interval method", iv.method),
         ("delta (policy)", f"{policy.delta:.3f}"),
-        ("smallest resolvable drop", f"{mde:.4f}"),
-        ("queries to resolve delta", str(needed)),
+        ("smallest resolvable drop", f"{mde:.3f} (population spread)"),
+        ("queries to resolve delta", f"{needed} (has {golden})"),
     ]
     return "\n".join(
         f"<tr><td>{label}</td><td class='mono'>{value}</td></tr>" for label, value in pairs
     )
+
+
+def _population_sd(policy: GatePolicy, sample: int = 4000) -> float:
+    """Per-query difference spread estimated on a large draw, matching experiment 02.
+
+    The resolution rows use this rather than the fifty-query set's own spread, because an sd
+    estimated from fifty queries is itself noisy and would disagree with the headline numbers. The
+    verdict and interval above stay on the fifty queries a team actually holds.
+    """
+    big = build_scenario(golden_size=sample)
+    scores = score_pair(
+        corpus=big.corpus,
+        golden=big.golden,
+        baseline_config=big.baseline_config,
+        candidate_config=big.candidate_config,
+        metric=policy.primary_metric,
+        k=policy.k,
+        baseline_seed=5,
+        candidate_seed=6,
+    )
+    return float(np.std(scores.candidate - scores.baseline, ddof=1))
 
 
 def render_report() -> str:
@@ -76,7 +97,7 @@ def render_report() -> str:
         candidate_seed=6,
     )
     verdict = gate(scores.baseline, scores.candidate, policy, seed=7)
-    sd_diff = float(np.std(scores.candidate - scores.baseline, ddof=1))
+    sd_diff = _population_sd(policy)
     mde = minimum_detectable_effect(scenario.golden.n_queries, sd_diff, policy.alpha, policy.power)
     needed = required_sample_size(policy.delta, sd_diff, policy.alpha, policy.power)
 

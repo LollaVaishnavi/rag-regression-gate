@@ -71,7 +71,7 @@ BCa fired nearly three times as often as it promised, because the paired-differe
 
 ## The resolution arithmetic
 
-On the shipped candidate the per-query **difference spread of 0.049** in ndcg@10 means that, with a 50-query set, the smallest drop it can **resolve about 0.019** at 95% confidence and 80% power. The policy cares about a 0.01 drop, so to resolve it the set **needs 187 queries** and has 50. That gap, between the set a team holds and the set the claim needs, is the number this project exists to surface. Reproduce with `ragscore power` or `python experiments/exp02_resolution.py`.
+On the shipped candidate the per-query **difference spread of 0.050** in ndcg@10 means that, with a 50-query set, the smallest drop it can **resolve about 0.020** at 95% confidence and 80% power. The policy cares about a 0.01 drop, so to resolve it the set **needs 193 queries** and has 50. That gap, between the set a team holds and the set the claim needs, is the number this project exists to surface. Reproduce with `ragscore power` or `python experiments/exp02_resolution.py`.
 
 ## What it costs against what it buys
 
