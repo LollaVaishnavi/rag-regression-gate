@@ -1,0 +1,28 @@
+# Gate policy for ragscore. Every field here changes a verdict; nothing that changes a verdict
+# lives anywhere else. The comments record why each default is what it is, so a reviewer can argue
+# with the policy without reading the code.
+
+[gate]
+# Ranking cut-off. 10 because a retrieval-augmented prompt in this project packs ten passages into
+# the context window, so quality below rank 10 never reaches the model and should not reach the gate.
+k = 10
+
+# The smallest mean drop in ndcg@10 that the team is willing to fail a build over. A drop smaller
+# than this is treated as tolerable drift rather than a regression. This is a product decision, not
+# a statistical one, which is exactly why it is here and not in the source.
+delta = 0.02
+
+# Two-sided significance for the bootstrap confidence interval on the metric difference.
+alpha = 0.05
+
+# Target power for the required-sample-size arithmetic only. It never affects a live verdict; it
+# answers the separate question "how many queries would it take to call a delta-sized drop".
+power = 0.80
+
+# Bootstrap resamples. Fixed at 5000 because experiment 00 shows the interval endpoints stop moving
+# (to three decimal places) above roughly 4000 resamples on this data. More is just slower.
+n_resamples = 5000
+
+# The metric the verdict is computed from. recall@k and mrr are still measured and reported, but a
+# gate that fails on three metrics at once fails on the noisiest of the three, so only one gates.
+primary_metric = "ndcg"
