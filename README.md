@@ -67,7 +67,7 @@ Under the null the candidate is the baseline retriever run a second time, so the
 | BCa | 14% |
 | percentile | 5.8% |
 
-BCa fired nearly three times as often as it promised, because the paired-difference vector is zero-inflated: most queries rank the relevant documents identically across two runs, so BCa's acceleration term is estimated from a jackknife of a near-constant vector and is unstable. The percentile interval estimates no acceleration and stays near nominal. The naive threshold, for contrast, **naive fired on 0%** of the null, which is its one virtue: it is blind near the threshold rather than trigger-happy on jitter. Reproduce with `python experiments/exp01_calibration.py`.
+BCa fired nearly three times as often as it promised, because the paired-difference vector is zero-inflated: most queries rank the relevant documents identically across two runs, so BCa's acceleration term is estimated from a jackknife of a near-constant vector and is unstable. The percentile interval estimates no acceleration and stays near nominal. The naive threshold, for contrast, **naive fired on 0%** of the null, which is a measured zero over 400 sets and so means below roughly 1 in 400, not a guarantee. That is the naive gate's one virtue: it is blind near the threshold rather than trigger-happy on jitter. Reproduce with `python experiments/exp01_calibration.py`.
 
 ## The resolution arithmetic
 
