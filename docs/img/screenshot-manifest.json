@@ -1,0 +1,9 @@
+{
+  "output": "docs/img/report.png",
+  "source_report": "reports/report.html",
+  "badge": {
+    "color": "rgb(255, 255, 255)",
+    "background": "rgb(138, 109, 0)",
+    "visible": true
+  }
+}

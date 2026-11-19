@@ -1,0 +1,30 @@
+{
+  "segments": [
+    {
+      "label": "ragscore gate",
+      "exit_code": 2,
+      "duration_s": 1.221,
+      "stdout": "ragscore gate\n  primary metric : ndcg@10\n  observed diff  : -0.0052  (candidate minus baseline)\n  95% interval  : [-0.0161, +0.0041]  via percentile\n  delta (policy) : 0.0100\n  naive verdict  : pass\n  gate verdict   : inconclusive\n  note           : the gate and the naive threshold disagree on this sample"
+    },
+    {
+      "label": "ragscore power",
+      "exit_code": 0,
+      "duration_s": 1.209,
+      "stdout": "ragscore power\n  golden set size    : 50 queries\n  per-query diff sd  : 0.0366\n  delta (policy)     : 0.0100\n  min detectable drop: 0.0145  at this size\n  queries to resolve : 106  to call a 0.010 drop at 95%/80%\n  note               : this set cannot resolve the drop the policy cares about"
+    },
+    {
+      "label": "ragscore gate --blend 0.12",
+      "exit_code": 1,
+      "duration_s": 1.236,
+      "stdout": "ragscore gate\n  primary metric : ndcg@10\n  observed diff  : -0.0430  (candidate minus baseline)\n  95% interval  : [-0.0675, -0.0209]  via percentile\n  delta (policy) : 0.0100\n  naive verdict  : regression\n  gate verdict   : regression"
+    },
+    {
+      "label": "python experiments/exp01_calibration.py",
+      "exit_code": 0,
+      "duration_s": 8.161,
+      "stdout": "null false-positive (regression) rate over 400 golden sets of 50 queries\n  nominal     : 5.0%\n  BCa         : 14.0%\n  percentile  : 5.8%\n  naive       : 0.0%"
+    }
+  ],
+  "gif": "demo.gif",
+  "mp4": "demo.mp4"
+}

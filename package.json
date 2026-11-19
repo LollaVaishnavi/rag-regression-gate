@@ -1,0 +1,12 @@
+{
+  "name": "rag-regression-gate-evidence",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Node tooling used only to render the architecture diagram for the README. Not needed for make verify.",
+  "scripts": {
+    "diagram": "python tools/render_diagrams.py"
+  },
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^12.2.0"
+  }
+}
