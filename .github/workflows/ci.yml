@@ -1,0 +1,88 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install (no evidence extras, so a missing optional import would fail here)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Import the package without the evidence extras
+        run: python -c "import ragscore; print('import ok')"
+
+      - name: Lint
+        run: ruff check src tests experiments tools
+
+      - name: Tests
+        run: |
+          python -m pytest \
+            --junitxml=reports/junit.xml \
+            --cov=ragscore \
+            --cov-report=json:reports/coverage.json \
+            --cov-report=term-missing \
+            -q
+
+      - name: Coverage floor
+        run: |
+          python - <<'PY'
+          import json, sys
+          pct = json.load(open("reports/coverage.json"))["totals"]["percent_covered"]
+          print(f"coverage {pct:.1f}%")
+          sys.exit(0 if pct >= 95 else 1)
+          PY
+
+      - name: Receipts (re-measure every figure and check the README against it)
+        run: |
+          python tools/collect_metrics.py --skip-tests
+          python tools/check_numbers.py
+
+      - name: Calibration table to the job summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os
+          m = json.load(open("docs/metrics.json"))["metrics"]
+          lines = [
+            "### Null calibration (the number the gate had to earn)",
+            "",
+            "| interval method | null false-positive rate |",
+            "| --- | --- |",
+            f"| nominal | {m['nominal_fp_pct']} |",
+            f"| BCa | {m['bca_null_fp_pct']} |",
+            f"| percentile (default) | {m['percentile_null_fp_pct']} |",
+            "",
+            f"Shipped scenario: a real {m['shipped_population_drop']} drop, "
+            f"measured as {m['shipped_observed_drop']} on {m['golden_size']} queries, "
+            f"needs {m['required_queries']} queries to resolve.",
+          ]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as fh:
+              fh.write("\n".join(lines) + "\n")
+          PY
+
+      - name: Upload experiment outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiments-py${{ matrix.python-version }}
+          path: |
+            docs/experiments/*.json
+            docs/metrics.json
